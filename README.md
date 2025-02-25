@@ -71,7 +71,7 @@ Feel free to fork this repository, make improvements, and submit a pull request.
 This project is licensed under the **MIT License**.
 
 ## 📧 Contact
-For any queries or suggestions, reach out via [your-email@example.com](mailto:your-email@example.com) or open an issue on GitHub.
+For any queries or suggestions, reach out via (mailto:karanbir2935.beai24@chitakra.edu.in) or open an issue on GitHub.
 
 Happy Coding! 🚀🔥
 

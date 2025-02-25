@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<style>
+    .Container {
+        
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 70vh; /* Full height to center vertically */
+    }
+</style>
+
+<div class="Container">
+    <form method="POST" style="background: rgb(191, 191, 240); padding: 20px; display: inline-block; border-radius: 10px; text-align: center; width: 50vw; height: 50vh ;margin-top:25vh ;">
+        <h2 style="color: black;">Sign Up</h2>
+        <input type="text" name="username" placeholder="Username" required style="display: block; margin: 10px auto; padding: 20px;width: 45vw;">
+        <input type="email" name="email" placeholder="Email" required style="display: block; margin: 10px auto; padding: 20px;width: 45vw;">
+        <input type="password" name="password" placeholder="Password" required style="display: block; margin: 10px auto; padding: 20px;width: 45vw;">
+<br>
+<br>
+        <button type="submit" style="background: white; color: black; padding: 10px 20px; border: none; cursor: pointer; font-weight: 600; font-size: 15px; width: 40vw; border-radius: 10;">Register</button>
+    </form>
+</div>
+{% endblock %}

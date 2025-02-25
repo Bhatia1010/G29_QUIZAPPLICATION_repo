@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            /* justify-content: center; */
+            /* align-items: center; */
+            flex-direction: column;
+        }
+
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .navbar>a {
+            text-decoration: none;
+            color: black;
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20vh;
+            /* margin-left: 20vw; */
+            /* width: 40vw;
+            height: 40vh; */
+        }
+
+        .container>form {
+            width: 40vw;
+            height: 40vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+
+
+
+
+        .main-content {
+            flex: 1;
+        }
+
+        footer {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            margin-top: 40px;
+            margin-bottom: 0px;
+        }
+
+        /* Flash Messages - Positioned at the top with smooth animations */
+        .flash-messages {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 500px;
+            z-index: 1000;
+        }
+
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: fadeInSlide 0.5s ease-out forwards;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Message types */
+        .flash-success {
+            background: #28a745;
+            color: #fff;
+        }
+
+        .flash-error {
+            background: #dc3545;
+            color: #fff;
+        }
+
+        .flash-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .flash-info {
+            background: #17a2b8;
+            color: #fff;
+        }
+
+        /* Close (Dismiss) Button */
+        .flash-message .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 15px;
+            transition: opacity 0.3s ease;
+        }
+
+        .flash-message .close-btn:hover {
+            opacity: 0.7;
+        }
+
+        /* Fade-in and Slide-down animation */
+        @keyframes fadeInSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Fade-out animation */
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Hide message when dismissed */
+        .flash-message.hide {
+            animation: fadeOut 0.3s ease-out forwards;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="logo">
+            <img style="height: 60px;width: 60px;" src="/static/images/WhatsApp Image 2025-02-21 at 16.20.27.jpeg"
+                alt="Logo" />
+        </div>
+        <input type="search" placeholder="Search"
+            style="padding: 8px; border-radius: 5px; border: 1px solid #ddd; width: 300px;">
+        <!-- <button class="button">View Quizzes</button> -->
+        <a href="{{ url_for('home' ) }}">Home</a>
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('dashboard' ) }}">Dashboard</a>
+        <a href="{{ url_for('profile' ) }}">Profile</a>
+        <a href="{{ url_for('logout' ) }}">Logout</a>
+        {% elif email=="admin@gmail.com" %}
+        <a href="{{ url_for('admindashboard' ) }}">Admin Dashboard</a>
+        {% else%}
+        <a href="{{ url_for('registerFunction' ) }}">Sign Up</a>
+        <a href="{{ url_for('loginFunction' ) }}">Login</a>
+        {% endif %}
+        <a href="{{ url_for('about_us' ) }}">About us</a>
+    </nav>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+        {% for category, message in messages %}
+        <div class="flash-message flash-{{ category }}">
+            <span>{{ message }}</span>
+            <button class="close-btn" onclick="dismissFlash(this)">&times;</button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+    <div class="main-content">
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    <footer>
+        <div style="display: flex; justify-content: space-around; margin-bottom: 20px;">
+            <div>
+                <h4>Popular Templates</h4>
+                <p>Best Quizzes</p>
+                <p>All Templates</p>
+                <p>Overview</p>
+            </div>
+            <div>
+                <h4>Resources</h4>
+                <p>Blog</p>
+                <p>Resource center</p>
+                <p>Support</p>
+            </div>
+            <div>
+                <h4>About</h4>
+                <p>How to play Quiz</p>
+                <p>Log in</p>
+                <p>Sign up</p>
+            </div>
+        </div>
+    </footer>
+    </main>
+
+    <script>
+        $(document).ready(function () {
+            $('.quiz-section').each(function (i) {
+                $(this).css('animation', 'fadeIn 0.5s ease-out forwards ' + (i * 0.2) + 's');
+            });
+        });
+        // Function to dismiss flash messages smoothly
+        function dismissFlash(button) {
+            let flashMessage = button.parentElement;
+            flashMessage.classList.add("hide");
+            setTimeout(() => {
+                flashMessage.remove();
+            }, 300); // Wait for fade-out animation to complete
+        }
+
+        // Auto-dismiss flash messages after 5 seconds
+        setTimeout(() => {
+            document.querySelectorAll(".flash-message").forEach((msg) => {
+                msg.classList.add("hide");
+                setTimeout(() => msg.remove(), 300);
+            });
+        }, 5000);
+
+    </script>
+</body>
+
+</html>

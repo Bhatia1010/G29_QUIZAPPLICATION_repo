@@ -1,0 +1,258 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #f5f5f5;
+    }
+
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .quiz-card {
+        background: #6b46c1;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .button {
+        background: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .button:hover {
+        background: #45a049;
+    }
+
+    .quiz-section {
+        margin-bottom: 60px;
+        animation-delay: calc(var(--delay) * 0.2s);
+    }
+
+    .placeholder-img {
+        width: 100%;
+        height: 200px;
+        background: #ddd;
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+
+    .main-content {
+        /* margin-left: 200px; */
+        padding: 80px 40px 40px;
+        flex: 1;
+    }
+
+    .card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeIn 0.5s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        margin: 30px 0;
+    }
+
+    .quiz-card {
+        background: #6b46c1;
+        color: white;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    .button {
+        background: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .button:hover {
+        background: #45a049;
+    }
+
+    .quiz-section {
+        margin-bottom: 60px;
+        animation-delay: calc(var(--delay) * 0.2s);
+    }
+
+    .placeholder-img {
+        width: 100%;
+        height: 200px;
+        background: #ddd;
+        margin: 20px 0;
+        border-radius: 10px;
+    }
+</style>
+
+<main style="margin-top: 50px;" class="main-content">
+    <section class="quiz-section" style="--delay: 0">
+        <div class="card">
+            <h2>Create Your Quiz Experience</h2>
+            <div class="card-grid">
+                <div class="quiz-card">
+                    <img src="/static/images/quiztime_giphy.gif" alt="" style="width: 200px;">
+                    <h3>Create Quiz</h3>
+                    <p>Create A Quiz According to Your Need.</p>
+                    <br>
+                    <p style="color: #ff6b6b;">Only Admins can create quizzes.</p>
+                </div>
+                <div class="quiz-card">
+                    <img src="/static/images/sliding_pandas_giphy.gif" alt="" width="200px">
+                    <h3>Use Templates</h3>
+                    <p>Use templates for easy and quick Quiz Creation.</p>
+                    <br>
+                    <button class="button">Choose Templates</button>
+                </div>
+                <div class="quiz-card">
+                    <img src="/static/images/more_questions_giphy.gif" alt="" width="180px" height="170px">
+                    <h3>AI Tools</h3>
+                    <p>Use AI Tools for Quiz. Chat with Our Chatbot.</p>
+                    <br>
+                    <button class="button">Use Now!</button>
+                </div>
+                <div class="quiz-card">
+                    <img src="/static/images/penguin_giphy.gif" alt="" width="200px;">
+                    <h3>Join Challenges</h3>
+                    <p>Join the Ongoing Quiz Challenges</p>
+                    <br>
+                    <button class="button">Join Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" style="--delay: 1">
+        <div style="display: inline-flex;" class="card">
+
+            <img style="height: 60vh;"
+                src="/static/images/use-cases-online-quiz-create-high-quality-quizzes-our-easy-to-use-quiz-maker.webp"
+                alt="World Map" />
+            <div style="text-align: center; font-size: xx-large;">
+                <br>
+                <br>
+                <h2>Navigate the Globe: World Geography Quiz</h2>
+                <br>
+                <br>
+                <p>Step into a realm of discovery where every question takes you closer to mastering the fascinating
+                    intricacies of our planet.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" style="--delay: 2">
+        <div style="display: inline-flex;" class="card">
+
+            <img style=" width: 60vh;"
+                src="/static/images/use-cases-online-quiz-make-quizzes-more-interactive-engaging.webp"
+                alt="Education Illustration" />
+            <div style="text-align: center; font-size: xx-large;">
+                <br>
+                <br>
+                <h2>Journey Through Knowledge</h2>
+                <br>
+                <br>
+                <p>Explore the vast landscape of facts, trivia, and timeless insights. From history to science and
+                    beyond, challenge your mind and uncover fascinating tidbits along the way.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" style="--delay: 3">
+        <div style="display:inline-flex ;" class="card">
+
+            <img style="height: 60vh;" src="/static/images/educational_pic_for_cards.png"
+                alt="Education Illustration" />
+            <div style="text-align: center; font-size: xx-large;">
+                <br>
+                <br>
+                <h2>Scholarly Pursuits: A Comprehensive Journey Through Modern Education</h2>
+                <br>
+                <br>
+                <p>Explore the evolution of learning and technology in education. Challenge yourself with questions that
+                    span history, theory, and practice.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="quiz-section" style="--delay: 4">
+        <div style="display: inline-flex;" class="card">
+
+            <!-- <div style="text-align: center; margin: 20px 0;">
+                <div style="display: inline-block; border: 2px solid #4CAF50; border-radius: 50%; padding: 20px;">
+                    <h3>70%</h3>
+                    <p>Score</p>
+                </div>
+            </div> -->
+            <img style="height:50vh;" src="/static/images/use-cases-online-quiz-save-time-with-automatic-scoring.webp"
+                alt="">
+            <div style="text-align: center;font-size:xx-large;">
+                <br>
+                <br>
+                <h1>Automatic Scoring System</h1>
+                <br>
+                <br>
+                <p>Easily auto-score quizzes by marking answer choices as right or wrong, and assigning score-weighting
+                    values.</p>
+            </div>
+        </div>
+    </section>
+
+    {% endblock %}

@@ -1,0 +1,248 @@
+{% extends "base.html" %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<style>
+    .dashboard-container{
+        margin-top: 10vh;
+    }
+</style>
+
+<div class="dashboard-container" style="margin-top: 20vh;">
+    <div class="profile-section">
+        <!-- Profile Header -->
+        <div class="profile-header">
+            <div class="avatar" style="margin-left: 22vw;">
+                <img src="data:image/jpeg;base64,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" alt="User Avatar">
+            </div>
+            <div class="user-info">
+                <h1>{{ user.name }}</h1>
+                <p>Email: {{ user.email }}</p>
+                <p>Member Since: {{ user.join_date }}</p>
+                <button class="edit-profile">Edit Profile</button>
+            </div>
+        </div>
+
+        <!-- User Statistics -->
+        <section class="statistics">
+            <h2>Quiz Statistics</h2>
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Quizzes Taken</h3>
+                    <p>{{ user.total_quizzes }}</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Average Score</h3>
+                    <p>{{ user.average_score }}%</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Highest Score</h3>
+                    <p>{{ user.highest_score }}%</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Recent Activity -->
+        <section class="recent-activity">
+            <h2>Recent Quizzes</h2>
+            <ul>
+                {% for quiz in user.recent_quizzes %}
+                <li>
+                    <strong>{{ quiz.title }}</strong> - Score: {{ quiz.score }}% ({{ quiz.date }})
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <!-- Settings -->
+        <section class="settings">
+            <h2>Account Settings</h2>
+            <button class="btn btn-change-password">Change Password</button>
+            <button class="btn btn-delete-account">Delete Account</button>
+        </section>
+    </div>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        .dashboard-container {
+            max-width: 900px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 20px;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .avatar img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            border: 3px solid #613e7e;
+        }
+
+        .user-info h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #333;
+        }
+
+        .user-info p {
+            margin: 5px 0;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .edit-profile {
+            background-color: #613e7e;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+            transition: background-color 0.3s;
+        }
+
+        .edit-profile:hover {
+            background-color: #613e7e;
+        }
+
+        .statistics h2, .recent-activity h2, .settings h2 {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .stat-card {
+            background-color: #613e7e;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            width: 130px;
+            text-align: center;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card p {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .recent-activity ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .recent-activity li {
+            background-color: #fff;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 8px 0;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+        }
+
+        .btn {
+            background-color: #0984e3;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            width: 100%;
+            margin: 10px 0;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #087ac3;
+        }
+
+        .btn-change-password {
+            background-color: #0984e3;
+        }
+
+        .btn-change-password:hover {
+            background-color: #087ac3;
+        }
+
+        .btn-delete-account {
+            background-color: #d63031;
+        }
+
+        .btn-delete-account:hover {
+            background-color: #e74c3c;
+        }
+
+        /* Responsive Design */
+        @media screen and (max-width: 768px) {
+            .profile-header {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .stats {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+
+            .stat-card {
+                width: 80%;
+                margin: 10px 0;
+            }
+
+            .btn {
+                width: auto;
+                margin: 10px;
+            }
+        }
+    </style>
+</div>
+{% endblock %}

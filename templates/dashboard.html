@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<style>
+    /* Center the Dashboard Content */
+div[style*="width: 80%"] {
+    max-width: 1400px;
+    margin: auto;
+    padding: 20px;
+}
+
+/* Improve Heading */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #4A4A4A;
+}
+
+/* Flash Messages Styling */
+p[style*="color"] {
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+/* Grid Layout for Quiz Cards */
+.content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Individual Quiz Cards */
+.content div {
+    background: #f8f8f8;
+    padding: 20px;
+    width: 25vw;
+    border-radius: 10px;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    gap: 15px;
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Hover Effect on Quiz Cards */
+.content div:hover {
+    transform: scale(1.05);
+    background: #e0e0e0;
+}
+
+/* Quiz Buttons */
+button {
+    background: #6a0dad;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+button a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #5a0cbf;
+}
+
+/* Footer Styling */
+footer {
+    text-align: center;
+    padding: 15px;
+    background: #222;
+    color: white;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+</style>
+
+
+<div style="width: 80%; margin-top: 15vh; padding: 20px;">
+    <h2 style=" text-align: center;">Welcome {{current_user.username}}</h2>
+    <h2 style="text-align: center;">This is your Dashboard</h2>
+    
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+        {% if category == 'success' %}
+        <p style="color: green; font-weight: bold; text-align: center;">{{ message }}</p>
+    {% elif category == 'danger' %}
+        <p style="color: red; font-weight: bold; text-align: center;">{{ message }}</p>
+    {% else %}
+        <p style="color: blue; font-weight: bold; text-align: center;">{{ message }}</p>
+    {% endif %}
+    
+        {% endif %}
+    {% endwith %}
+
+    <!-- <div style="background: white; padding: 20px; border-radius: 5px; box-shadow: 0px 0px 10px rgba(0,0,0,0.1);  text-align: center; background-color: white;">
+        <h3 style="color: #444;">Your Dashboard Content</h3>
+        <p style="color: #666;">This is a placeholder for dashboard-related features.</p>
+    </div> -->
+    <div style="display: grid;grid-template-columns: repeat(3,1fr);grid-template-rows: repeat(3,1fr);gap: 20px;" class="content">
+        <div>
+            <h4>C++</h4>
+            <p>Learn C++ Programming Language</p>
+            <button><a href="{{url_for('cppquizFunction')}}">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>Python</h4>
+            <p>Learn Python Programming Language</p>
+            <button><a href="{{ url_for('pyquizFunction' ) }}">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>Java</h4>
+            <p>Learn Java Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>JavaScript</h4>
+            <p>Learn JavaScript Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>HTML</h4>
+            <p>Learn HTML Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>CSS</h4>
+            <p>Learn CSS Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>SQL</h4>
+            <p>Learn SQL Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>C</h4>
+            <p>Learn C Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+        <div>
+            <h4>C#</h4>
+            <p>Learn C# Programming Language</p>
+            <button><a href="">START QUIZ</a></button>
+        </div>
+    </div>
+</div>
+    <!-- <footer style="text-align: center;justify-content: baseline;">
+        <h3>@copyright : 2025 Flask Application</h3>
+    </footer> -->
+{% endblock %}

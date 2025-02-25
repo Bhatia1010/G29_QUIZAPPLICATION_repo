@@ -1,0 +1,203 @@
+{% extends "base.html" %}
+
+{% block title %}C++ Quiz{% endblock %}
+
+{% block content %}
+<style>
+    /* body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: #f4f7fb;
+        margin: 0;
+        padding: 0;
+    } */
+
+    .container {
+        max-width: 900px;
+        margin: 50px auto;
+        background-color: white;
+        padding: 30px;
+        border-radius: 12px;
+        /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); */
+        box-sizing: border-box;
+        animation: fadeIn 1s ease-in-out; /* Fade-in animation */
+    }
+
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+
+    h1 {
+        text-align: center;
+        color: #333;
+        font-size: 32px;
+        margin-bottom: 30px;
+        animation: slideInDown 1s ease-in-out; /* Slide-in animation */
+    }
+
+    @keyframes slideInDown {
+        from {
+            transform: translateY(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .question {
+        margin-bottom: 25px;
+        animation: slideInLeft 0.8s ease-in-out; /* Slide-in animation for questions */
+    }
+
+    @keyframes slideInLeft {
+        from {
+            transform: translateX(-50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+
+    .question h3 {
+        font-size: 20px;
+        margin-bottom: 12px;
+        color: #333;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .options label {
+        font-size: 16px;
+        color: #555;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        background-color: #f0f4f7;
+    }
+
+    .options label:hover {
+        background-color: #e1f5fe;
+        transform: translateX(5px);
+    }
+
+    .options input {
+        width: 20px;
+        height: 20px;
+        margin-left: 5px;
+    }
+
+    .submit-btn {
+        background-color: #0984e3;
+        color: white;
+        padding: 14px 22px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        width: 100%;
+        margin-top: 30px;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+        animation: fadeInUp 1s ease-in-out; /* Fade-in and slide-up animation */
+    }
+
+    @keyframes fadeInUp {
+        from {
+            transform: translateY(50px);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+
+    .submit-btn:hover {
+        background-color: #74b9ff;
+        transform: scale(1.05);
+    }
+
+    .submit-btn:focus {
+        outline: none;
+    }
+
+    .error-message {
+        color: #e74c3c;
+        font-size: 16px;
+        margin-top: 20px;
+        text-align: center;
+        animation: shake 0.5s ease-in-out; /* Shake animation for error message */
+    }
+
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+        20%, 40%, 60%, 80% { transform: translateX(5px); }
+    }
+
+
+    /* Responsive Design */
+    @media screen and (max-width: 768px) {
+        .container {
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 28px;
+        }
+
+        .question h3 {
+            font-size: 18px;
+        }
+
+        .options label {
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            font-size: 16px;
+        }
+    }
+</style>
+
+<div class="container">
+    <h1>C++ Quiz</h1>
+    <form action="{{ url_for('submit_cpp_quiz') }}" method="POST">
+        {% for question in quiz['questions'] %}
+        <div class="question">
+            <h3>{{ loop.index }}. {{ question['question'] }}</h3>
+            <div class="options">
+                {% for option in question['options'] %}
+                <label>
+                    <input type="radio" name="q{{ loop.index }}" value="{{ option[0] }}" required>
+                    {{ option }}
+                </label><br>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+        <button type="submit" class="submit-btn">Submit Quiz</button>
+    </form>
+    <div class="error-message">
+        {% if error %}
+        <p>{{ error }}</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
